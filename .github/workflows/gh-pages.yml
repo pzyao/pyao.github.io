@@ -1,4 +1,12 @@
+# .github/workflows/gh-pages.yml
+
 name: Deploy Hugo site to GitHub Pages
+
+# Give Pages and branch-push permissions
+permissions:
+  contents: write
+  pages: write         # if you ever use the Pages API
+  id-token: write      # for future-proofing
 
 on:
   push:
@@ -12,17 +20,16 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          submodules: true   # fetch your theme
-          fetch-depth: 0     # for gh-pages pushes
+          submodules: true      # pull your theme
+          fetch-depth: 0        # full history needed for pushes
 
       - name: Setup Hugo
-        # ← pin to v2.x, not v4
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'   # or specific (e.g. '0.127.0')
+          hugo-version: 'latest'
           extended: true
 
-      - name: Build
+      - name: Build site
         run: hugo --minify
 
       - name: Deploy to GitHub Pages
