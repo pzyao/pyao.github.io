@@ -9,24 +9,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v4
-      with:
-        submodules: true
-        fetch-depth: 0
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: true   # fetch your theme
+          fetch-depth: 0     # for gh-pages pushes
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v4
-      with:
-        hugo-version: 'latest'
-        extended: true
+      - name: Setup Hugo
+        # ← pin to v2.x, not v4
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'   # or specific (e.g. '0.127.0')
+          extended: true
 
-    - name: Build
-      run: hugo --minify
+      - name: Build
+        run: hugo --minify
 
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
-        publish_branch: gh-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
