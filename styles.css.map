@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "styles.css",
-	"sourceRoot": "/home/runner/work/pyao.github.io/pyao.github.io",
+	"sourceRoot": "/home/runner/work/pzyao.github.io/pzyao.github.io",
 	"sources": [
 		"css/base.scss",
 		"themes/re-terminal/assets/css/variables.scss",
